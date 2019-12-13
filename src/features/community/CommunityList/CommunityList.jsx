@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import CommunityListItem from "./CommunityListItem"
 
 class CommunityList extends Component {
     render() {
         return (
-            <div>
-                
-            </div>
+        <Fragment>
+        {this.props.members.map(member =>(
+            <CommunityListItem key={member.id} member={member} />
+        ))}
+        </Fragment>
         )
     }
 }

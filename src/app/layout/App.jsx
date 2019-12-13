@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { Button, Container } from "semantic-ui-react";
-import GameDash from "../../features/game/GameDashboard/GameDash";
+import { Container } from "semantic-ui-react";
+import HomeDash from "../../features/home/HomeDashboard/HomeDash";
 import NavBar from "../../features/nav/Navbar/NavBar";
+import CommunityDash from "../../features/community/CommunityDashboard/CommunityDash";
+import GameDash from "../../features/game/GameDashboard/GameDash";
 
 class App extends Component {
   render() {
@@ -9,6 +11,8 @@ class App extends Component {
       <Fragment>
         <NavBar />
         <Container className='main'>
+          {/* <HomeDash /> */}
+          {/* <CommunityDash /> */}
           <GameDash />
         </Container>
       </Fragment>

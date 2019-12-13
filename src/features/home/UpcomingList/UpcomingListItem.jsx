@@ -13,7 +13,7 @@ class UpcomingListItem extends Component {
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image size='tiny' src={game.cover.url} />
+              <Item.Image size='small' src={game.cover.url} />
               <Item.Content>
                 <Item.Header as='a'>{game.name}</Item.Header>
                 <Item.Description>
