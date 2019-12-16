@@ -4,17 +4,17 @@ import CommunityListMember from "./CommunityListMember";
 
 class CommunityListItem extends Component {
   render() {
-    const {member} = this.props
+    const {community} = this.props
     return (
       <Segment.Group>
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image size='tiny' circular src={member.avatar} />
+              {/* <Item.Image size='tiny' circular src={community.avatar} /> */}
               <Item.Content>
-                <Item.Header as='a'>{member.username}</Item.Header>
+                <Item.Header as='a'>{community.name}</Item.Header>
                 <Item.Description>
-                  Created by <a>{member.username}</a>
+                  Created by <a>{community.description}</a>
                 </Item.Description>
               </Item.Content>
             </Item>
