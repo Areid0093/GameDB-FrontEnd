@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import { Grid, GridColumn, Button } from "semantic-ui-react";
 import CommunityList from "../CommunityList/CommunityList";
 import CommunityForm from "../CommunityForm/CommunityForm";
-import cuid from 'cuid'
+import cuid from "cuid";
 import axios from "axios";
 
+const options = {
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  }
+};
 // const communitiesArray = [
 //   {
 //     id: 1,
@@ -20,56 +25,97 @@ import axios from "axios";
 //   }
 // ]
 
-
-
 class CommunityDashboard extends Component {
   state = {
     communities: [],
-    isOpen: false
-  }
+    isOpen: false,
+    selectedCommunity: null
+  };
 
   componentDidMount() {
-    this.fetchCommunity()
+    this.fetchCommunity();
   }
 
   fetchCommunity = () => {
-    axios.get('http://localhost:3001/communities')
-    .then((response) => {
+    axios.get("http://localhost:3001/communities", options).then(response => {
       console.log(response.data);
       console.log(response.status);
       console.log(response.statusText);
       console.log(response.headers);
       console.log(response.config);
       // this.setState({communities: response.data})
+    });
+  };
+
+  handleCreateCommunity = newCommunity => {
+    axios({
+      url: "http://localhost:3001/communities",
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+      data: {
+        name: newCommunity.name,
+        title: newCommunity.title,
+        decription: newCommunity.description,
+        creator: newCommunity.creator
+      }
+    }).then(response => {
+      this.setState(({ communities }) => ({
+        communities: [communities, newCommunity],
+        isOpen: false
+      }));
+    });
+  };
+
+  // handleFormToggle = () => {
+  //   this.setState(({ isOpen }) => ({
+  //     isOpen: !isOpen
+  //   }));
+  // };
+
+  handleFormOpen = () => {
+    this.setState({
+      isOpen: true,
+      selectedCommunity: null
     })
   }
 
-  handleFormToggle = () => {
-    this.setState(({isOpen}) => ({
-      isOpen: !isOpen
-    }))
-  }
-
-  handleCreateCommunity = (newCommunity) => {
-    newCommunity.id = cuid()
-    this.setState(({communities}) => ({
-      communities: [communities, newCommunity],
+  handleFormCancel = () => {
+    this.setState({
       isOpen: false
-    }))
+    })
   }
 
+  handleSelectedCommunity = (event) => {
+    this.setState({
+      selectedCommunity: event,
+      isOpen: true
+    })
+  }
 
-    render() {
-    const {communities, isOpen} = this.state
+  render() {
+    const { communities, isOpen, selectedCommunity } = this.state;
     return (
       <Grid>
         <GridColumn width={10}>
           <h2>Communities</h2>
-          <CommunityList communities={communities} />
+          <CommunityList communities={communities} selectedCommunity={this.handleSelectedCommunity} />
         </GridColumn>
         <GridColumn width={6}>
-          <Button onClick={this.handleFormToggle} positive content='Create Community' />
-          {isOpen && <CommunityForm createCommunity={this.handleCreateCommunity} cancelFormToggle={this.handleFormToggle} />}
+          <Button
+            onClick={this.handleFormOpen}
+            positive
+            content='Create Community'
+          />
+          {isOpen && (
+            <CommunityForm
+              key={selectedCommunity ? selectedCommunity.id : 0}
+              selectedCommunity={this.selectedCommunity}
+              createCommunity={this.handleCreateCommunity}
+              cancelFormToggle={this.handleFormCancel}
+            />
+          )}
         </GridColumn>
       </Grid>
     );

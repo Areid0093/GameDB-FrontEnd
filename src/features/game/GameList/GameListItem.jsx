@@ -8,12 +8,13 @@ class GameListItem extends Component {
     let date = game.first_release_date;
     let newDate = moment(new Date(date * 1000)).format("MM/DD/YYYY");
     let genres = game.genres !== undefined ? game.genres[0].name : "Miscellaneous";
+    let photo = game.cover.url
     return (
       <Segment.Group>
         <Segment>
           <Item.Group>
             <Item>
-              {/* <Item.Image size='small' src={game.cover.url} /> */}
+              <Item.Image size='small' src={photo} />
               <Item.Content>
                 <Item.Header as='a'>{game.name}</Item.Header>
                 <Item.Description>

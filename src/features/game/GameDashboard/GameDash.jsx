@@ -23,12 +23,13 @@ class GameDash extends Component {
         "user-key": "c90cb5de0b345a2d028c840c4d36d540"
       },
       data: 
-      "f *;" + 
-      "limit 500;" + 
+      "f genres.name, first_release_date, cover.url, *;" + 
+      "limit 25;" + 
+      "where (cover.url != null & first_release_date != null);" +
       `search "${query}";`
     })
       .then(response => {
-        debugger;
+        debugger
         console.log(response);
         this.setState({ games: response.data });
       })
@@ -39,11 +40,13 @@ class GameDash extends Component {
 
   render() {
     return (
-      <Grid>
-        <GridColumn width={10}>
+      <Grid columns={3}>
+      {/* <Grid.Row> */}
+        <Grid.Column>
           <h2>Games</h2>
           <GameList games={this.state.games} />
-        </GridColumn>
+        </Grid.Column>
+        {/* </Grid.Row> */}
       </Grid>
     );
   }
