@@ -1,30 +1,26 @@
 import React, { Component } from "react";
-import { Segment, Form, Button} from 'semantic-ui-react'
+import { Segment, Form, Button, Message} from 'semantic-ui-react'
 
 class CommunityForm extends Component {
   render() {
     return (
       <Segment>
-        <Form>
-          <Form.Field>
-            <label>Game Title</label>
+        <Form success>
+          <Form.Field required>
+            <label>Community Name</label>
             <input placeholder='Name' />
           </Form.Field>
           <Form.Field>
-            <label>Event Date</label>
-            <input type='date' placeholder='Event Date' />
+            <label>Game(s)</label>
+            <input placeholder='Game title(s)' />
           </Form.Field>
           <Form.Field>
-            <label>City</label>
-            <input placeholder='City event is taking place' />
+            <label>Description</label>
+            <input placeholder='Enter a brief description of the community' />
           </Form.Field>
-          <Form.Field>
-            <label>Venue</label>
-            <input placeholder='Enter the Venue of the event' />
-          </Form.Field>
-          <Form.Field>
-            <label>Hosted By</label>
-            <input placeholder='Enter the name of person hosting' />
+          <Form.Field required>
+            <label>Created By</label>
+            <input placeholder='Enter the name of creator' />
           </Form.Field>
           <Button positive type='submit'>
             Submit
