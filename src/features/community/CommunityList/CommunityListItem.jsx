@@ -4,7 +4,7 @@ import CommunityListMember from "./CommunityListMember";
 
 class CommunityListItem extends Component {
   render() {
-    const {community} = this.props
+    const {community, selectedCommunity} = this.props
     return (
       <Segment.Group>
         <Segment>
@@ -27,7 +27,7 @@ class CommunityListItem extends Component {
         </Segment>
         <Segment clearing>
         <span> Description will go here!! </span>
-          <Button as='a' color='teal' floated='right' content='Join' />
+          <Button onClick={() => selectedCommunity(community)} as='a' color='teal' floated='right' content='Join' />
         </Segment>
       </Segment.Group>
     );

@@ -81,7 +81,6 @@ class GameDash extends Component {
           "sort first_release_date asc;"
         })
         .then(response => {
-          debugger
           console.log(response);
           this.setState({ upcomingGames: response.data });
         })
