@@ -5,8 +5,8 @@ class CommunityList extends Component {
     render() {
         return (
         <Fragment>
-        {this.props.members.map(member =>(
-            <CommunityListItem key={member.id} member={member} />
+        {this.props.communities.map(community =>(
+            <CommunityListItem key={community.id} community={community} />
         ))}
         </Fragment>
         )
