@@ -12,8 +12,8 @@ class App extends Component {
         <NavBar />
         <Container className='main'>
           {/* <HomeDash /> */}
-          {/* <CommunityDash /> */}
-          <GameDash />
+          <CommunityDash />
+          {/* <GameDash /> */}
         </Container>
       </Fragment>
     );
