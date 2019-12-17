@@ -2,32 +2,29 @@ import React, { Component } from "react";
 import { Grid, GridColumn, Button } from "semantic-ui-react";
 import CommunityList from "../CommunityList/CommunityList";
 import CommunityForm from "../CommunityForm/CommunityForm";
-import cuid from "cuid";
 import axios from "axios";
+import {connect} from 'react-redux'
+import {createCommunity, updateCommunity, deleteCommunity} from '../communityActions'
 
 const options = {
   headers: {
     "Access-Control-Allow-Origin": "*"
   }
 };
-// const communitiesArray = [
-//   {
-//     id: 1,
-//     name: 'noob',
-//     title: 'noob@noob.com',
-//     avatar: 'https://wallpapercave.com/wp/wp2178691.jpg'
-//   },
-//   {
-//     id: 2,
-//     name: 'domer',
-//     title: 'domer@domer.com',
-//     avatar: 'https://omair.me/wp-content/uploads/edd/2018/09/100-Free-Gaming-Logo-Design-Templates_-Angry-Game-Controller.jpg'
-//   }
-// ]
+
+const mapState = (state) => ({
+  communities: state.communities
+})
+
+
+const actions = {
+  createCommunity,
+  updateCommunity,
+  deleteCommunity
+}
 
 class CommunityDashboard extends Component {
   state = {
-    communities: [],
     isOpen: false,
     selectedCommunity: null
   };
@@ -57,22 +54,17 @@ class CommunityDashboard extends Component {
       data: {
         name: newCommunity.name,
         title: newCommunity.title,
-        decription: newCommunity.description,
+        description: newCommunity.description,
         creator: newCommunity.creator
       }
     }).then(response => {
+      this.props.createCommunity(newCommunity)
       this.setState(({ communities }) => ({
-        communities: [communities, newCommunity],
+        // communities: [communities, newCommunity],
         isOpen: false
       }));
     });
   };
-
-  // handleFormToggle = () => {
-  //   this.setState(({ isOpen }) => ({
-  //     isOpen: !isOpen
-  //   }));
-  // };
 
   handleFormOpen = () => {
     this.setState({
@@ -95,7 +87,9 @@ class CommunityDashboard extends Component {
   }
 
   render() {
-    const { communities, isOpen, selectedCommunity } = this.state;
+    const { isOpen, selectedCommunity } = this.state;
+    const { communities } = this.props
+    console.log(this.props)
     return (
       <Grid>
         <GridColumn width={10}>
@@ -122,4 +116,4 @@ class CommunityDashboard extends Component {
   }
 }
 
-export default CommunityDashboard;
+export default connect(mapState, actions)(CommunityDashboard);

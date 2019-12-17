@@ -7,7 +7,7 @@ class UpcomingListItem extends Component {
     const {game} = this.props
     let date = game.first_release_date
     let newDate = moment(new Date(date * 1000)).format('MM/DD/YYYY')
-    let genres =  game.genres !== undefined ? game.genres[0].name : "miscellaneous"
+    let genres =  game.genres[0].name
     return (
       <Segment.Group>
         <Segment>

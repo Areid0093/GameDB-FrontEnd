@@ -4,7 +4,7 @@ import { Segment, Item, Button } from "semantic-ui-react";
 class GameListItem extends Component {
   render() {
     const {game} = this.props
-    let genres =  game.genres !== undefined ? game.genres[0].name : "Miscellaneous"
+    let genres =  game.genres[0].name
     let rating = parseInt(game.rating)
     return (
       <Segment.Group>

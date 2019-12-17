@@ -7,9 +7,9 @@ import UpcomingList from "../UpcomingList/UpcomingList";
 
 class GameDash extends Component {
   state = {
-    topGames: [],
     recentGames: [],
-    upcomingGames: []
+    upcomingGames: [],
+    topGames: []
   };
 
   componentDidMount() {
@@ -29,7 +29,7 @@ class GameDash extends Component {
       },
       data:
         "f name, rating, genres.name, cover.url;" +
-        "where rating > 90;" +
+        "where (rating > 90 & genres.name != null);" +
         "sort rating desc;"
     })
       .then(response => {
@@ -53,7 +53,7 @@ class GameDash extends Component {
       data:
         "f name, genres.name, cover.url, first_release_date;" +
         "sort first_release_date desc;" +
-        `where first_release_date < ${date};`
+        `where (first_release_date < ${date} & cover.url != null & first_release_date != null & genres.name != null);`
         
     })
       .then(response => {
@@ -77,8 +77,8 @@ class GameDash extends Component {
         },
         data:
           "f name, genres.name, cover.url, first_release_date;" +
-          `where first_release_date > ${date};` +
-          "sort first_release_date asc;"
+          "sort first_release_date asc;" +
+          `where (first_release_date > ${date} & cover.url != null & first_release_date != null & genres.name != null);` 
         })
         .then(response => {
           console.log(response);

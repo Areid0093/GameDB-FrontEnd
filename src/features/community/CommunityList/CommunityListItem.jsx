@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import CommunityListMember from "./CommunityListMember";
+import { Link } from "react-router-dom";
 
 class CommunityListItem extends Component {
   render() {
-    const {community, selectedCommunity} = this.props
+    const { community, selectedCommunity } = this.props;
+    debugger
     return (
       <Segment.Group>
         <Segment>
@@ -14,7 +16,7 @@ class CommunityListItem extends Component {
               <Item.Content>
                 <Item.Header as='a'>{community.name}</Item.Header>
                 <Item.Description>
-                  Created by <a>{community.description}</a>
+                  {/* Created by <a>{community.description}</a> */}
                 </Item.Description>
               </Item.Content>
             </Item>
@@ -22,12 +24,18 @@ class CommunityListItem extends Component {
         </Segment>
         <Segment secondary>
           <List horizontal>
-          <CommunityListMember />
+            <CommunityListMember />
           </List>
         </Segment>
         <Segment clearing>
-        <span> Description will go here!! </span>
-          <Button onClick={() => selectedCommunity(community)} as='a' color='teal' floated='right' content='Join' />
+          <span> Description will go here!! </span>
+          <Button
+            as={Link}
+            to={`/communities/${community.id}`}
+            color='teal'
+            floated='right'
+            content='Join'
+          />
         </Segment>
       </Segment.Group>
     );

@@ -1,13 +1,30 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux'
 import { Segment, Form, Button, Message } from "semantic-ui-react";
+
+const mapState = (state, ownProps) => {
+  const communityId = ownProps.match.params.id
+
+  let community = {
+    name: '',
+    title: '',
+    description: '',
+    creator: '',
+  }
+
+  if(communityId && state.communities.length > 0) {
+      community = state.communities.filter(community => community.id === communityId)[0]
+  }
+
+  return {
+      community
+  }
+}
 
 class CommunityForm extends Component {
   state = {
-    name: "",
-    title: "",
-    description: "",
-    creator: ""
-  };
+    ...this.props.community
+  }
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -21,7 +38,7 @@ class CommunityForm extends Component {
   };
 
   render() {
-    const { cancelFormToggle } = this.props;
+    // const { cancelFormToggle } = this.props;
     const { name, title, description, creator } = this.state;
     return (
       <Segment>
@@ -65,7 +82,7 @@ class CommunityForm extends Component {
           <Button positive type='submit'>
             Submit
           </Button>
-          <Button onClick={cancelFormToggle} type='button'>
+          <Button onClick={this.props.history.goBack} type='button'>
             Cancel
           </Button>
         </Form>
@@ -74,4 +91,4 @@ class CommunityForm extends Component {
   }
 }
 
-export default CommunityForm;
+export default connect(mapState)(CommunityForm);
