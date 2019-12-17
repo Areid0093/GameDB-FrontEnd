@@ -25,7 +25,7 @@ class NavBar extends Component {
             GamerBase
           </Menu.Item>
           <Menu.Item as={NavLink} to='/games' name='Games' />
-          <Menu.Item as={NavLink} to='/communities' name='Community' />
+          <Menu.Item as={NavLink} exact to='/communities' name='Community' />
           <Button
             as={Link}
             to='/createCommunity'

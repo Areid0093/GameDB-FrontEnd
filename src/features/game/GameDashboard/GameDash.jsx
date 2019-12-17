@@ -40,13 +40,11 @@ class GameDash extends Component {
 
   render() {
     return (
-      <Grid columns={3}>
-      {/* <Grid.Row> */}
-        <Grid.Column>
+      <Grid>
+      <Grid.Row>
           <h2>Games</h2>
           <GameList games={this.state.games} />
-        </Grid.Column>
-        {/* </Grid.Row> */}
+        </Grid.Row>
       </Grid>
     );
   }

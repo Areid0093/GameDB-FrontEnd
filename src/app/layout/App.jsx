@@ -26,18 +26,19 @@ class App extends Component {
               <NavBar />
               <Container className='main'>
                 <Route exact path='/home' component={HomeDash} />
+                <Route
+                  path='/communities/:id'
+                  component={CommunityDetailedPage}
+                />
                 <Route path='/recent' component={RecentDetailedPage} />
                 <Route path='/upcoming' component={UpcomingDetailedPage} />
                 <Route path='/top' component={TopDetailedPage} />
-                <Route path='/communities' component={CommunityDash} />
+                <Route exact path='/communities' component={CommunityDash} />
                 <Route path='/settings' component={SettingsDash} />
                 <Route path='/games' component={GameDash} />
-                <Route
-                  path='/community/:id'
-                  component={CommunityDetailedPage}
-                />
+                
                 <Route path='/profile/:id' component={UserDetailedPage} />
-                <Route path='/createCommunity' component={CommunityForm} />
+                <Route path={['/createCommunity', '/manage/:id']} component={CommunityForm} />
               </Container>
             </Fragment>
           )}
