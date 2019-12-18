@@ -1,6 +1,5 @@
 import React from "react";
 import { Segment, Item, Image, Header, Button } from "semantic-ui-react";
-import communityReducer from "../communityReducer";
 import { Link } from "react-router-dom";
 
 const eventImageStyle = {

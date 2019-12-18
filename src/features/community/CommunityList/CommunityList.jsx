@@ -3,11 +3,11 @@ import CommunityListItem from "./CommunityListItem"
 
 class CommunityList extends Component {
     render() {
-    const {communities, selectedCommunity} = this.props
+    const {communities} = this.props
         return (
         <Fragment>
         {communities.map(community =>(
-            <CommunityListItem key={community.id} community={community} selectedCommunity={selectedCommunity}/>
+            <CommunityListItem key={community.id} community={community}/>
         ))}
         </Fragment>
         )

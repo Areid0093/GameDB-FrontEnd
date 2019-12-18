@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux'
-import { Segment, Form, Button, Message } from "semantic-ui-react";
+import { Segment, Form, Button} from "semantic-ui-react";
+import {createCommunity} from '../communityActions'
+import axios from 'axios'
 
 const mapState = (state, ownProps) => {
   const communityId = ownProps.match.params.id
 
-  let community = {
+  let community = { 
     name: '',
     title: '',
     description: '',
@@ -21,15 +23,43 @@ const mapState = (state, ownProps) => {
   }
 }
 
+const actions = {
+  createCommunity
+}
+
 class CommunityForm extends Component {
   state = {
     ...this.props.community
   }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.props.createCommunity(this.state)
-  };
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   this.props.handleCreateCommunity(this.state)
+  // };
+
+  handleCreateCommunity = event => {
+    event.preventDefault()
+    const newCommunity = {...this.state}
+    axios({
+      url: "http://localhost:3001/communities",
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+      data: {
+        name: newCommunity.name,
+        title: newCommunity.title,
+        description: newCommunity.description,
+        creator: newCommunity.creator,
+      }
+    }).then(response => {
+      this.props.createCommunity(newCommunity)
+      // console.log(newCommunity)
+      // debugger
+      this.props.history.push('/communities')
+      });
+    };
+
 
   handleFormChange = ({target: {name, value}}) => {
     this.setState({
@@ -38,11 +68,10 @@ class CommunityForm extends Component {
   };
 
   render() {
-    // const { cancelFormToggle } = this.props;
     const { name, title, description, creator } = this.state;
     return (
       <Segment>
-        <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
+        <Form onSubmit={this.handleCreateCommunity} autoComplete='off'>
           <Form.Field required>
             <label>Community Name</label>
             <input
@@ -91,4 +120,4 @@ class CommunityForm extends Component {
   }
 }
 
-export default connect(mapState)(CommunityForm);
+export default connect(mapState, actions)(CommunityForm);

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
+import { Segment, Item, List, Button } from "semantic-ui-react";
 import CommunityListMember from "./CommunityListMember";
 import { Link } from "react-router-dom";
 
 class CommunityListItem extends Component {
   render() {
-    const { community, selectedCommunity } = this.props;
-    debugger
+    const { community } = this.props;
     return (
       <Segment.Group>
         <Segment>
