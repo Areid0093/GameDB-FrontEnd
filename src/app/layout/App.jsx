@@ -5,7 +5,7 @@ import HomePage from "../../features/home/HomeDashboard/HomePage";
 import NavBar from "../../features/nav/Navbar/NavBar";
 import CommunityDash from "../../features/community/CommunityDashboard/CommunityDash";
 import GameDash from "../../features/game/GameDashboard/GameDash";
-import { Route } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import CommunityDetailedPage from "../../features/community/CommunityDetailed/CommunityDetailedPage";
 import RecentDetailedPage from "../../features/home/HomeDetailed/RecentDetailedPage";
 import UpcomingDetailedPage from "../../features/home/HomeDetailed/UpcomingDetailedPage";
@@ -25,6 +25,7 @@ class App extends Component {
             <Fragment>
               <NavBar />
               <Container className='main'>
+              <Switch key={this.props.location.key}>
                 <Route exact path='/home' component={HomeDash} />
                 <Route
                   path='/communities/:id'
@@ -39,6 +40,7 @@ class App extends Component {
                 
                 <Route path='/profile/:id' component={UserDetailedPage} />
                 <Route path={['/createCommunity', '/manage/:id']} component={CommunityForm} />
+                </Switch>
               </Container>
             </Fragment>
           )}
@@ -48,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Segment, Item, Label } from "semantic-ui-react";
 
 const CommunityDetailedSidebar = ({members}) => {
-const creator = false
+// const creator = false
   return (
     <Fragment>
       <Segment
