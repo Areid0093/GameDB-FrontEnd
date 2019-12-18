@@ -6,8 +6,8 @@ class CommunityList extends Component {
     const {communities} = this.props
         return (
         <Fragment>
-        {communities.map(community =>(
-            <CommunityListItem key={community.id} community={community}/>
+        {communities.map((community, idx) =>(
+            <CommunityListItem key={idx} community={community}/>
         ))}
         </Fragment>
         )

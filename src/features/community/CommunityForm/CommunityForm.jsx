@@ -1,45 +1,68 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
-import { Segment, Form, Button} from "semantic-ui-react";
-import {createCommunity} from '../communityActions'
-import axios from 'axios'
+import { connect } from "react-redux";
+import { reduxForm, Field } from "redux-form";
+import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
+import { createCommunity } from "../communityActions";
+import axios from "axios";
+import TextInput from "../../../app/common/form/TextInput";
+import TextArea from "../../../app/common/form/TextArea";
+import SelectInput from "../../../app/common/form/SelectInput";
+import {composeValidators, combineValidators, isRequired, hasLengthGreaterThan} from 'revalidate'
 
 const mapState = (state, ownProps) => {
-  const communityId = ownProps.match.params.id
+  const communityId = ownProps.match.params.id;
 
-  let community = { 
-    name: '',
-    title: '',
-    description: '',
-    creator: '',
-  }
+  let community = {};
 
-  if(communityId && state.communities.length > 0) {
-      community = state.communities.filter(community => community.id === communityId)[0]
+  if (communityId && state.communities.length > 0) {
+    community = state.communities.filter(
+      community => community.id === communityId
+    )[0];
   }
 
   return {
-      community
-  }
-}
+    initialValues: community
+  };
+};
 
 const actions = {
   createCommunity
-}
+};
+
+const platform = [
+  {key: 'xbox', text: 'Xbox', value: 'xbox'},
+  {key: 'playstation', text: 'Playstation', value: 'playstation'},
+  {key: 'pc', text: 'PC', value: 'pc'},
+]
+
+const validate = combineValidators({
+  name: isRequired({message: 'Community name is required!'}),
+  title: isRequired({message: 'At least one game title is required!'}),
+  description: composeValidators(
+    isRequired({message: 'Please enter a description!'}),
+    hasLengthGreaterThan(4)({message: 'Description needs to be at least 5 characters!'})
+  )(),
+  creator: isRequired({message: 'Creator name is required!'})
+})
+
+
 
 class CommunityForm extends Component {
-  state = {
-    ...this.props.community
-  }
+  // state = {
+  //   ...this.props.community
+  // };
 
   // handleFormSubmit = event => {
   //   event.preventDefault();
   //   this.props.handleCreateCommunity(this.state)
   // };
+  // componentDidMount() {
+  //   this.handleCreateCommunity()
+  // }
 
-  handleCreateCommunity = event => {
-    event.preventDefault()
-    const newCommunity = {...this.state}
+
+  handleCreateCommunity = values => {
+    const newCommunity = { ...values };
     axios({
       url: "http://localhost:3001/communities",
       method: "POST",
@@ -50,74 +73,68 @@ class CommunityForm extends Component {
         name: newCommunity.name,
         title: newCommunity.title,
         description: newCommunity.description,
-        creator: newCommunity.creator,
+        creator: newCommunity.creator
       }
     }).then(response => {
-      this.props.createCommunity(newCommunity)
+      this.props.createCommunity(newCommunity);
       // console.log(newCommunity)
       // debugger
-      this.props.history.push('/communities')
-      });
-    };
-
-
-  handleFormChange = ({target: {name, value}}) => {
-    this.setState({
-      [name]: value
-    })
+      this.props.history.push("/communities");
+    });
   };
 
+
+
   render() {
-    const { name, title, description, creator } = this.state;
+    const {invalid, submitting, pristine} = this.props
     return (
-      <Segment>
-        <Form onSubmit={this.handleCreateCommunity} autoComplete='off'>
-          <Form.Field required>
-            <label>Community Name</label>
-            <input
-              onChange={this.handleFormChange}
-              name='name'
-              value={name}
-              placeholder='Name'
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Game(s)</label>
-            <input
-              onChange={this.handleFormChange}
-              name='title'
-              value={title}
-              placeholder='Game title(s)'
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Description</label>
-            <input
-              onChange={this.handleFormChange}
-              name='description'
-              value={description}
-              placeholder='Enter a brief description of the community'
-            />
-          </Form.Field>
-          <Form.Field required>
-            <label>Created By</label>
-            <input
-              onChange={this.handleFormChange}
-              name='creator'
-              value={creator}
-              placeholder='Enter the name of creator'
-            />
-          </Form.Field>
-          <Button positive type='submit'>
-            Submit
-          </Button>
-          <Button onClick={this.props.history.goBack} type='button'>
-            Cancel
-          </Button>
-        </Form>
-      </Segment>
+      <Grid>
+        <Grid.Column width={10}>
+          <Segment>
+          <Header sub color='teal' content='Community Details' />
+            <Form onSubmit={this.props.handleSubmit(this.handleCreateCommunity)} autoComplete='off'>
+              <Field
+                name='name'
+                component={TextInput}
+                placeholder='Community Name'
+              />
+              <Field
+                name='title'
+                component={TextInput}
+                placeholder='Game Title(s)'
+              />
+              <Field
+                name='platform'
+                component={SelectInput}
+                options={platform}
+                placeholder='Platform(s)'
+              />
+              <Field
+                name='description'
+                component={TextArea}
+                rows={3}
+                placeholder='Description'
+              />
+              <Field
+                name='creator'
+                component={TextInput}
+                placeholder='Creator Name'
+              />
+              <Button disabled={invalid || submitting || pristine} positive type='submit'>
+                Submit
+              </Button>
+              <Button onClick={this.props.history.goBack} type='button'>
+                Cancel
+              </Button>
+            </Form>
+          </Segment>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-export default connect(mapState, actions)(CommunityForm);
+export default connect(
+  mapState,
+  actions
+)(reduxForm({ form: "communityForm", validate })(CommunityForm));
