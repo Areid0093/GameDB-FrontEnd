@@ -13,11 +13,13 @@ import TopDetailedPage from "../../features/home/HomeDetailed/TopDetailedPage";
 import UserDetailedPage from "../../features/user/UserDetailed/UserDetailedPage";
 import CommunityForm from "../../features/community/CommunityForm/CommunityForm";
 import SettingsDash from "../../features/user/Settings/SettingsDash";
+import ModalManager from "../../features/modals/ModalManager";
 
 class App extends Component {
   render() {
     return (
       <Fragment>
+      <ModalManager />
         <Route exact path='/' component={HomePage} />
         <Route
           path='/(.+)'
