@@ -24,24 +24,23 @@ const actions = {
 
 class CommunityDashboard extends Component {
 
-  componentDidMount() {
-    this.fetchCommunity();
-  }
+  // componentDidMount() {
+  //   this.fetchCommunity();
+  // }
 
-  fetchCommunity = () => {
-    axios.get("http://localhost:3001/communities", options).then(response => {
-      console.log(response.data);
-      console.log(response.status);
-      console.log(response.statusText);
-      console.log(response.headers);
-      console.log(response.config);
-      this.setState({communities: response.data})
-    });
-  };
+  // fetchCommunity = () => {
+  //   axios.get("http://localhost:3001/communities", options).then(response => {
+  //     console.log(response.data);
+  //     console.log(response.status);
+  //     console.log(response.statusText);
+  //     console.log(response.headers);
+  //     console.log(response.config);
+  //     this.setState({communities: response.data})
+  //   });
+  // };
 
   render() {
     const { communities } = this.props
-    console.log(this.props)
     return (
       <Grid>
         <GridColumn width={10}>

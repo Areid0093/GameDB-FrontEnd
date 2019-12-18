@@ -1,20 +1,7 @@
 import {createReducer} from '../../app/common/utils/reducerUtils'
-import { CREATE_COMMUNITY, UPDATE_COMMUNITY, DELETE_COMMUNITY } from './communityConstants'
+import { CREATE_COMMUNITY, UPDATE_COMMUNITY, DELETE_COMMUNITY, FETCH_COMMUNITIES, SET_COMMUNITIES } from './communityConstants'
 
-const initialState = [
-    {
-      id: 1,
-      name: 'noob',
-      title: 'noob@noob.com',
-      avatar: 'https://wallpapercave.com/wp/wp2178691.jpg'
-    },
-    {
-      id: 2,
-      name: 'domer',
-      title: 'domer@domer.com',
-      avatar: 'https://omair.me/wp-content/uploads/edd/2018/09/100-Free-Gaming-Logo-Design-Templates_-Angry-Game-Controller.jpg'
-    }
-  ]
+const initialState = []
 
 const createCommunity = (state, payload) => {
     return [...state, payload.community]
@@ -32,8 +19,17 @@ const deleteCommunity = (state, payload) => {
     ]
 }
 
+const fetchCommunities = (state, payload) => {
+    return payload.communities
+}
+const setCommunities = (state, payload) => {
+    return payload.communities
+}
+
 export default createReducer(initialState, {
     [CREATE_COMMUNITY]: createCommunity,
     [UPDATE_COMMUNITY]: updateCommunity,
-    [DELETE_COMMUNITY]: deleteCommunity
+    [DELETE_COMMUNITY]: deleteCommunity,
+    [SET_COMMUNITIES]: setCommunities,
+    [FETCH_COMMUNITIES]: fetchCommunities
 })
