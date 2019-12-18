@@ -9,8 +9,10 @@ import "./index.css";
 import App from "./app/layout/App";
 import * as serviceWorker from "./serviceWorker";
 import { configureStore } from "./app/store/configureStore";
+import { loadCommunities } from "./features/community/communityActions";
 
 const store = configureStore();
+store.dispatch(loadCommunities())
 
 const app = (
     <Provider store={store}>
