@@ -3,9 +3,10 @@ import UpcomingListItem from "./UpcomingListItem";
 
 class UpcomingList extends Component {
   render() {
+    const {upcomingGames} = this.props
     return (
       <Fragment>
-      {this.props.upcomingGames.map(game => (
+      {upcomingGames.map(game => (
         <UpcomingListItem key={game.id} game={game} />
       ))}
       </Fragment>

@@ -16,7 +16,7 @@ class GameListItem extends Component {
             <Item>
               <Item.Image size='small' src={photo} />
               <Item.Content>
-                <Item.Header as='a'>{game.name}</Item.Header>
+                <Item.Header>{game.name}</Item.Header>
                 <Item.Description>
                   Genre: {genres} <br></br>
                   Release Date: {newDate}
@@ -27,6 +27,7 @@ class GameListItem extends Component {
         </Segment>
         <Segment clearing>
           <Button as='a' color='teal' floated='right' content='Favorite' />
+          <Button as='a' color='teal' floated='left' content='View' />
         </Segment>
       </Segment.Group>
     );

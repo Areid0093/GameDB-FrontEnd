@@ -1,4 +1,4 @@
-import { CREATE_COMMUNITY, UPDATE_COMMUNITY, DELETE_COMMUNITY, FETCH_COMMUNITIES, SET_COMMUNITIES } from "./communityConstants"
+import { CREATE_COMMUNITY, UPDATE_COMMUNITY, DELETE_COMMUNITY, FETCH_COMMUNITIES } from "./communityConstants"
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../async/asyncActions"
 import axios from "axios"
 
@@ -30,27 +30,6 @@ export const deleteCommunity = (communityId) => {
     }
 }
 
-// export const setCommunities = (communities) => {
-//     return {
-//         type: SET_COMMUNITIES,
-//         payload: {
-//             communities
-//         }
-//     }
-// }
-
-// export const fetchCommunities = () => {
-//     return dispatch => {
-//         axios.get('http://localhost:3001/communities')
-//             .then(response => {
-//                 dispatch(setCommunities(response.data))
-//                 console.log(response.data)
-//             })
-//     }
-// }
-
-
-
 export const loadCommunities = () => {
     return dispatch => {
         axios.get('http://localhost:3001/communities').then(response => {
@@ -58,7 +37,6 @@ export const loadCommunities = () => {
             dispatch(asyncActionStart())
             dispatch({type: FETCH_COMMUNITIES, payload: {communities}})
             dispatch(asyncActionFinish())
-            console.log(communities)
         })
         .catch(error => {
             console.log(error)

@@ -1,16 +1,17 @@
 import React, { Component, Fragment } from "react";
-import GameListItem from "./TopListItem";
+import TopListItem from "./TopListItem";
 
-class GameList extends Component {
+class TopList extends Component {
   render() {
+    const {topGames} = this.props
     return (
     <Fragment>
-    {this.props.topGames.map(game =>(
-      <GameListItem key={game.id} game={game}/>
+    {topGames.map(game =>(
+      <TopListItem key={game.id} game={game}/>
     ))}
     </Fragment>
     )
   }
 }
 
-export default GameList
+export default TopList

@@ -10,9 +10,13 @@ import App from "./app/layout/App";
 import * as serviceWorker from "./serviceWorker";
 import { configureStore } from "./app/store/configureStore";
 import { loadCommunities } from "./features/community/communityActions";
+import { loadTop, loadRecent, loadUpcoming } from "./features/home/homeActions";
 
 const store = configureStore();
 store.dispatch(loadCommunities())
+store.dispatch(loadTop())
+store.dispatch(loadRecent())
+store.dispatch(loadUpcoming())
 
 const app = (
     <Provider store={store}>

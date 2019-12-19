@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
 import CommunityList from "../CommunityList/CommunityList";
-import axios from "axios";
 import {connect} from 'react-redux'
 import {createCommunity, updateCommunity, deleteCommunity} from '../communityActions'
-
-const options = {
-  headers: {
-    "Access-Control-Allow-Origin": "*"
-  }
-};
 
 const mapState = (state) => ({
   communities: state.communities
