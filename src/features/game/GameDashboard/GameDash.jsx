@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Grid } from "semantic-ui-react";
+import { Grid, Container, Header, Icon } from "semantic-ui-react";
 import GameList from "../GameList/GameList";
 
 class GameDash extends Component {
@@ -24,12 +24,12 @@ class GameDash extends Component {
       },
       data: 
       "f genres.name, first_release_date, cover.url, *;" + 
-      "limit 25;" + 
+      "limit 10;" + 
       "where (cover.url != null & first_release_date != null);" +
       `search "${query}";`
     })
       .then(response => {
-        debugger
+        // debugger
         console.log(response);
         this.setState({ games: response.data });
       })
@@ -39,13 +39,22 @@ class GameDash extends Component {
   };
 
   render() {
+    const {games} = this.state
+    let first = games.filter((x,i) => !(i % 2))
+    let second = games.filter((x,i) => i % 2) 
     return (
-      <Grid>
-      <Grid.Row>
-          <h2>Games</h2>
-          <GameList games={this.state.games} />
-        </Grid.Row>
+      <Header as='h1' size='huge' color='teal' icon>
+      Game Database
+      <Icon size='tiny' color='teal' name='gamepad' />
+      <Grid columns={2}>
+       <Grid.Column>
+       <GameList games={first} />
+       </Grid.Column>
+       <Grid.Column>
+       <GameList games={second} />
+       </Grid.Column>
       </Grid>
+      </Header>
     );
   }
 }

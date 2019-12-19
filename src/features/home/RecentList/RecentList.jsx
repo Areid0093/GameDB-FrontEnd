@@ -3,9 +3,10 @@ import RecentListItem from "./RecentListItem";
 
 class RecentList extends Component {
   render() {
+    const {recentGames} = this.props
     return (
       <Fragment>
-      {this.props.recentGames.map(game => (
+      {recentGames.map(game => (
         <RecentListItem key={game.id} game={game} />
       ))}
       </Fragment>

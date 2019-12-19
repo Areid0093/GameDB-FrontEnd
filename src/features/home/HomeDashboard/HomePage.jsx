@@ -1,5 +1,20 @@
 import React from "react";
 import { Segment, Container, Header, Image, Button, Icon } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { loadTop, loadUpcoming, loadRecent } from "../homeActions";
+
+const mapState = (state) => ({
+  topGames: state.topGames,
+  recentGames: state.recentGames,
+  upcomingGames: state.upcomingGames
+});
+
+const actions = {
+  loadTop,
+  loadUpcoming,
+  loadRecent
+};
+
 
 const HomePage = ({history}) => {
   return (
@@ -23,4 +38,4 @@ const HomePage = ({history}) => {
   );
 };
 
-export default HomePage;
+export default connect(mapState, actions)(HomePage);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Item, Button } from "semantic-ui-react";
 
-class GameListItem extends Component {
+class TopListItem extends Component {
   render() {
     const {game} = this.props
     let genres =  game.genres[0].name
@@ -30,4 +30,4 @@ class GameListItem extends Component {
   }
 }
 
-export default GameListItem;
+export default TopListItem;
