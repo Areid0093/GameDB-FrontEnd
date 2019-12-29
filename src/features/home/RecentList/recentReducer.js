@@ -4,9 +4,9 @@ import { FETCH_RECENT } from '../homeConst'
 const initialState = []
 
 const fetchRecent = (state, payload) => {
-    return payload.recentGames
+  return payload.recentGames
 }
 
 export default createReducer(initialState, {
-    [FETCH_RECENT]: fetchRecent,
+  [FETCH_RECENT]: fetchRecent
 })

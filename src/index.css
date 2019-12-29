@@ -4,6 +4,8 @@ body {
 
 /*home page styles*/
 
+
+
 .masthead {
   display: flex;
   align-items: center;
@@ -16,10 +18,11 @@ body {
   height: 100vh;
 }
 
-/* .masthead.segment {
+
+.masthead.segment {
   min-height: 700px;
   padding: 1em 0 !important;
-} */
+} 
 
 .masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {

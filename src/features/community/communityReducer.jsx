@@ -1,35 +1,40 @@
-import {createReducer} from '../../app/common/utils/reducerUtils'
-import { CREATE_COMMUNITY, UPDATE_COMMUNITY, DELETE_COMMUNITY, FETCH_COMMUNITIES, SET_COMMUNITIES } from './communityConstants'
+import { createReducer } from '../../app/common/utils/reducerUtils'
+import {
+  CREATE_COMMUNITY,
+  UPDATE_COMMUNITY,
+  DELETE_COMMUNITY,
+  FETCH_COMMUNITIES,
+  SET_COMMUNITIES
+} from './communityConstants'
 
 const initialState = []
 
 const createCommunity = (state, payload) => {
-    return [...state, payload.community]
+  return [...state, payload.community]
 }
 
 const updateCommunity = (state, payload) => {
-    return [
-        ...state.filter(community => community.id !== payload.community.id), payload.community
-    ]
+  return [
+    ...state.filter(community => community.id !== payload.community.id),
+    payload.community
+  ]
 }
 
 const deleteCommunity = (state, payload) => {
-    return [
-        ...state.filter(community => community.id !== payload.communityId)
-    ]
+  return [...state.filter(community => community.id !== payload.communityId)]
 }
 
 const fetchCommunities = (state, payload) => {
-    return payload.communities
+  return payload.communities
 }
 const setCommunities = (state, payload) => {
-    return payload.communities
+  return payload.communities
 }
 
 export default createReducer(initialState, {
-    [CREATE_COMMUNITY]: createCommunity,
-    [UPDATE_COMMUNITY]: updateCommunity,
-    [DELETE_COMMUNITY]: deleteCommunity,
-    [SET_COMMUNITIES]: setCommunities,
-    [FETCH_COMMUNITIES]: fetchCommunities
+  [CREATE_COMMUNITY]: createCommunity,
+  [UPDATE_COMMUNITY]: updateCommunity,
+  [DELETE_COMMUNITY]: deleteCommunity,
+  [SET_COMMUNITIES]: setCommunities,
+  [FETCH_COMMUNITIES]: fetchCommunities
 })
