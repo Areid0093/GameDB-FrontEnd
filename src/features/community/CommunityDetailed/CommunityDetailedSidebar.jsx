@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
-import { Segment, Item, Label } from "semantic-ui-react";
+import React, { Fragment } from 'react'
+import { Segment, Item, Label } from 'semantic-ui-react'
 
-const CommunityDetailedSidebar = ({members}) => {
-// const creator = false
+const CommunityDetailedSidebar = ({ members }) => {
+  // const creator = false
   return (
     <Fragment>
       <Segment
         textAlign='center'
-        style={{ border: "none" }}
+        style={{ border: 'none' }}
         attached='top'
         secondary
         inverted
@@ -17,9 +17,9 @@ const CommunityDetailedSidebar = ({members}) => {
       </Segment>
       <Segment attached>
         <Item.Group divided>
-          <Item style={{ position: "relative" }}>
+          <Item style={{ position: 'relative' }}>
             <Label
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               color='orange'
               ribbon='right'
             >
@@ -33,7 +33,7 @@ const CommunityDetailedSidebar = ({members}) => {
         </Item.Group>
       </Segment>
     </Fragment>
-  );
-};
+  )
+}
 
-export default CommunityDetailedSidebar;
+export default CommunityDetailedSidebar

@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import GameListItem from "./GameListItem";
+import React, { Component, Fragment } from 'react'
+import GameListItem from './GameListItem'
 
 class GameList extends Component {
   render() {
@@ -9,8 +9,8 @@ class GameList extends Component {
           <GameListItem key={game.id} game={game} />
         ))}
       </Fragment>
-    );
+    )
   }
 }
 
-export default GameList;
+export default GameList

@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Segment, Comment, Form, Button, Header } from "semantic-ui-react";
+import React, { Fragment } from 'react'
+import { Segment, Comment, Form, Button, Header } from 'semantic-ui-react'
 
 const CommunityDetailedChat = () => {
   return (
@@ -9,7 +9,7 @@ const CommunityDetailedChat = () => {
         attached='top'
         inverted
         color='teal'
-        style={{ border: "none" }}
+        style={{ border: 'none' }}
       >
         <Header>Chat with the community</Header>
       </Segment>
@@ -38,9 +38,7 @@ const CommunityDetailedChat = () => {
                 <div>Yesterday at 12:30AM</div>
               </Comment.Metadata>
               <Comment.Text>
-                <p>
-                  You're just mad cuz u suck bro, git gud!
-                </p>
+                <p>You're just mad cuz u suck bro, git gud!</p>
               </Comment.Text>
               <Comment.Actions>
                 <Comment.Action>Reply</Comment.Action>
@@ -54,7 +52,9 @@ const CommunityDetailedChat = () => {
                   <Comment.Metadata>
                     <div>Just now</div>
                   </Comment.Metadata>
-                  <Comment.Text>Say that to me one more time, I dare u</Comment.Text>
+                  <Comment.Text>
+                    Say that to me one more time, I dare u
+                  </Comment.Text>
                   <Comment.Actions>
                     <Comment.Action>Reply</Comment.Action>
                   </Comment.Actions>
@@ -74,7 +74,7 @@ const CommunityDetailedChat = () => {
         </Comment.Group>
       </Segment>
     </Fragment>
-  );
-};
+  )
+}
 
-export default CommunityDetailedChat;
+export default CommunityDetailedChat

@@ -3,10 +3,10 @@ import { FETCH_TOP } from '../homeConst'
 
 const initialState = []
 
-const fetchTop= (state, payload) => {
-    return payload.topGames
+const fetchTop = (state, payload) => {
+  return payload.topGames
 }
 
 export default createReducer(initialState, {
-    [FETCH_TOP]: fetchTop,
+  [FETCH_TOP]: fetchTop
 })
