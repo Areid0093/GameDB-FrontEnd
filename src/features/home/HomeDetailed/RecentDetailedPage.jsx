@@ -31,3 +31,4 @@ const RecentDetailedPage = ({ recentGames }) => {
 }
 
 export default connect(mapState)(RecentDetailedPage)
+

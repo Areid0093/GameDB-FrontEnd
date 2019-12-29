@@ -31,3 +31,4 @@ const TopDetailedPage = ({ topGames }) => {
 }
 
 export default connect(mapState)(TopDetailedPage)
+
