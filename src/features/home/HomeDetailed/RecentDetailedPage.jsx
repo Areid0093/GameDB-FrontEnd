@@ -13,17 +13,17 @@ const RecentDetailedPage = ({ recentGames }) => {
   return (
     <Fragment>
       <Grid>
-      <Header as='h1' textAlign='center' icon>
-        <Header.Content>Recent Releases</Header.Content>
-        <Icon color='red' name='fire' />
-      </Header>
-      <Grid.Row columns={2}>
-        <Grid.Column>
-          <RecentList recentGames={first} />
-        </Grid.Column>
-        <Grid.Column>
-          <RecentList recentGames={second} />
-        </Grid.Column>
+        <Header as='h1' textAlign='center' icon>
+          <Header.Content>Recent Releases</Header.Content>
+          <Icon color='red' name='fire' />
+        </Header>
+        <Grid.Row columns={2}>
+          <Grid.Column>
+            <RecentList recentGames={first} />
+          </Grid.Column>
+          <Grid.Column>
+            <RecentList recentGames={second} />
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </Fragment>
