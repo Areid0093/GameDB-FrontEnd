@@ -31,7 +31,7 @@ const CommunityDetailedPage = ({ community }) => {
         <CommunityDetailedChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <CommunityDetailedSidebar />
+        <CommunityDetailedSidebar community={community} />
       </Grid.Column>
     </Grid>
   )

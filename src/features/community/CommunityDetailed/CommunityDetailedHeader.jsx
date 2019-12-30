@@ -41,15 +41,15 @@ const CommunityDetailedHeader = ({ community }) => {
 
       <Segment attached='bottom'>
         <Button color='teal'>JOIN THIS COMMUNITY</Button>
-
+{/* 
         <Button
           as={Link}
-          // to={`/manage/${community.id}`}
+          to={`/manage/${community.id}`}
           color='orange'
           floated='right'
         >
           Manage Community
-        </Button>
+        </Button> */}
       </Segment>
     </Segment.Group>
   )

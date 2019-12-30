@@ -1,9 +1,4 @@
-import {
-  CREATE_COMMUNITY,
-  UPDATE_COMMUNITY,
-  DELETE_COMMUNITY,
-  FETCH_COMMUNITIES
-} from './communityConstants'
+import * as types from './communityConstants'
 import {
   asyncActionStart,
   asyncActionFinish,
@@ -12,25 +7,46 @@ import {
 import { toastr } from 'react-redux-toastr'
 import axios from 'axios'
 
-export const createCommunity = community => {
-  return async dispatch => {
-    try {
-      dispatch({
-        type: CREATE_COMMUNITY,
-        payload: {
-          community
-        }
+const url = 'http://localhost:3001'
+
+// export const createCommunity = community => {
+//   return async dispatch => {
+//     try {
+//       dispatch({
+//         type: CREATE_COMMUNITY,
+//         payload: {
+//           community
+//         }
+//       })
+//       toastr.success('Success!', 'Community has been created!')
+//     } catch (error) {
+//       toastr.error('Oops!', 'Something went wrong!')
+//     }
+//   }
+// }
+
+export const createCommunity = (community) => {
+  return dispatch => {
+    return axios
+      .post(`${url}/communities`, {
+        community: community
       })
-      toastr.success('Success!', 'Community has been created!')
-    } catch (error) {
-      toastr.error('Oops!', 'Something went wrong!')
-    }
+      .then(response => {
+        let community = response.data
+        console.log(response.data)
+        dispatch({ type: types.CREATE_COMMUNITY, payload: { community } })
+        toastr.success('Success!', 'Community has been created!')
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error('Oops!', 'Something went wrong!')
+      })
   }
 }
 
 export const updateCommunity = community => {
   return {
-    type: UPDATE_COMMUNITY,
+    type: types.UPDATE_COMMUNITY,
     payload: {
       community
     }
@@ -39,7 +55,7 @@ export const updateCommunity = community => {
 
 export const deleteCommunity = communityId => {
   return {
-    type: DELETE_COMMUNITY,
+    type: types.DELETE_COMMUNITY,
     payload: {
       communityId
     }
@@ -53,7 +69,7 @@ export const loadCommunities = () => {
       .then(response => {
         let communities = response.data
         dispatch(asyncActionStart())
-        dispatch({ type: FETCH_COMMUNITIES, payload: { communities } })
+        dispatch({ type: types.FETCH_COMMUNITIES, payload: { communities } })
         dispatch(asyncActionFinish())
       })
       .catch(error => {

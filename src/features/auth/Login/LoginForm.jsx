@@ -3,15 +3,15 @@ import { Form, Segment, Button, Label } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import TextInput from '../../../app/common/form/TextInput'
 import { connect } from 'react-redux'
-// import { authenticate } from '../authActions'
+import { loginUser } from '../authActions'
 
 const actions = {
-  // authenticate
+  loginUser
 }
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, loginUser }) => {
   return (
-    <Form size='large' onSubmit={handleSubmit()} autoComplete='off'>
+    <Form size='large' onSubmit={handleSubmit(loginUser)} autoComplete='off'>
       <Segment>
         <Field
           name='email'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Item, Button } from 'semantic-ui-react'
+import { Segment, Item } from 'semantic-ui-react'
 import moment from 'moment'
 
 class RecentListItem extends Component {

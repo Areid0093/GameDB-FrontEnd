@@ -22,6 +22,7 @@ class NavBar extends Component {
   handleRegister = () => this.props.openModal('RegisterModal')
 
   handleLogOut = () => {
+    localStorage.removeItem('token')
     this.props.logout()
     this.props.history.push('/')
   }

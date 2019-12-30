@@ -2,18 +2,21 @@ import { createReducer } from '../../app/common/utils/reducerUtils'
 import { LOGIN_USER, LOGOUT_USER } from './authConstants'
 
 const initialState = {
-  currentUser: {}
+  currentUser: null,
+  authenticated: false
 }
 
 const loginUser = (state, payload) => {
   return {
-    currentUser: payload
-}
+    currentUser: payload,
+    authenticated: true
+  }
 }
 
 const logoutUser = () => {
   return {
-    currentUser: null
+    currentUser: null,
+    authenticated: false
   }
 }
 
