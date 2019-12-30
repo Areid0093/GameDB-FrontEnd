@@ -54,49 +54,21 @@ const validate = combineValidators({
 })
 
 class CommunityForm extends Component {
-  // state = {
-  //   ...this.props.community
-  // };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   this.props.handleCreateCommunity(this.state)
-  // };
-  // componentDidMount() {
-  //   this.handleCreateCommunity()
-  // }
-
-  handleCreateCommunity = values => {
-    const newCommunity = { ...values }
-    axios({
-      url: 'http://localhost:3001/communities',
-      method: 'POST',
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      data: {
-        name: newCommunity.name,
-        title: newCommunity.title,
-        description: newCommunity.description,
-        creator: newCommunity.creator
-      }
-    }).then(response => {
-      this.props.createCommunity(newCommunity)
-      // console.log(newCommunity)
-      // debugger
-      this.props.history.push('/communities')
-    })
+  communitySubmit = (community) => {
+    this.props.createCommunity(community)
+    this.props.history.push('/communities')
   }
 
   render() {
-    const { invalid, submitting, pristine } = this.props
+    const { invalid, submitting, pristine, createCommunity } = this.props
     return (
       <Grid>
         <Grid.Column width={10}>
           <Segment>
             <Header sub color='teal' content='Community Details' />
             <Form
-              onSubmit={this.props.handleSubmit(this.handleCreateCommunity)}
+              onSubmit={this.props.handleSubmit(this.communitySubmit)}
               autoComplete='off'
             >
               <Field

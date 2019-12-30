@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, GridColumn, Label, Icon, Header, Container } from 'semantic-ui-react'
+import { Grid, Label, Icon, Header} from 'semantic-ui-react'
 import TopList from '../TopGameList/TopList'
 import RecentList from '../RecentList/RecentList'
 import UpcomingList from '../UpcomingList/UpcomingList'
