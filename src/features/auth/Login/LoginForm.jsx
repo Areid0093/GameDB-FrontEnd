@@ -1,17 +1,17 @@
 import React from 'react'
-import { Form, Segment, Button } from 'semantic-ui-react'
+import { Form, Segment, Button, Label } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import TextInput from '../../../app/common/form/TextInput'
 import { connect } from 'react-redux'
-import { login } from '../authActions'
+// import { authenticate } from '../authActions'
 
 const actions = {
-  login
+  // authenticate
 }
 
-const LoginForm = ({ login, handleSubmit }) => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
-    <Form error size='large' onSubmit={handleSubmit(login)} autoComplete='off'>
+    <Form size='large' onSubmit={handleSubmit()} autoComplete='off'>
       <Segment>
         <Field
           name='email'
@@ -25,6 +25,11 @@ const LoginForm = ({ login, handleSubmit }) => {
           type='password'
           placeholder='password'
         />
+        {error && 
+          <Label basic color='red'>
+            {error}
+          </Label>
+        }
         <Button fluid size='large' color='teal'>
           Login
         </Button>
