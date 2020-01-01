@@ -7,7 +7,7 @@ import { toastr } from 'react-redux-toastr'
 const url = 'http://localhost:3001'
 
 export const registerUser = user => {
-  return dispatch => {
+  return (dispatch, getState) => {
     return axios
       .post(`${url}/users`, {
         user: user
@@ -31,19 +31,18 @@ export const registerUser = user => {
   }
 }
 export const loginUser = user => {
-  return dispatch => {
+  return (dispatch, getState)  => {
     return axios
       .post(`${url}/login`, {
-        user: user
+        user
       })
       .then(response => {
         const token = response.data.jwt
         let userId = response.data.user.id
-        let user = response.data
-        console.log(response.data.user)
+        let user = response.data.user
+        console.log(response.data)
         localStorage.setItem('token', token)
         localStorage.setItem('userId', userId)
-        console.log(userId)
         dispatch({ type: types.LOGIN_USER, payload: { user } })
         dispatch(closeModal())
       })
@@ -56,11 +55,11 @@ export const loginUser = user => {
   }
 }
 
-export const updatePassword = password => {
-  return dispatch => {
+export const updatePassword = user => {
+  return (dispatch, getState) => {
     let userId = localStorage.getItem('userId')
      axios.patch(`${url}/users/${userId}`, {
-      password: password.newPassword1
+      user: {password: user.newPassword1}
     })
     .then(response => {
       console.log(response)

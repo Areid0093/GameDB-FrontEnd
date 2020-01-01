@@ -8,18 +8,43 @@ import AboutPage from './AboutPage'
 import PhotoPage from './PhotoPage'
 import AccountPage from './AccountPage'
 import { updatePassword } from '../../auth/authActions'
+import { updateProfile } from '../userActions'
 
 const actions = {
-  updatePassword
+  updatePassword,
+  updateProfile
 }
 
-const SettingsDash = ({ updatePassword }) => {
+// const mapState = state => ({
+//   user: state.auth.currentUser,
+//   userData: state.auth.currentUser.user.user
+// })
+
+const mapState = state => {
+  let userData = {}
+
+  if (state.auth.authenticated) {
+    userData = state.auth.currentUser.user
+  }
+
+  return {
+    userData: userData,
+    user: state.auth
+  };
+};
+
+const SettingsDash = ({ updatePassword, user, updateProfile, userData }) => {
+  console.log(user)
+  console.log(userData)
   return (
     <Grid>
       <Grid.Column width={12}>
         <Switch>
           <Redirect exact from='/settings' to='/settings/basic' />
-          <Route path='/settings/basic' component={BasicPage} />
+          <Route
+            path='/settings/basic'
+            render={() => <BasicPage initialValues={userData} updateProfile={updateProfile}/>}
+          />
           <Route path='/settings/about' component={AboutPage} />
           <Route path='/settings/photos' component={PhotoPage} />
           <Route
@@ -35,4 +60,4 @@ const SettingsDash = ({ updatePassword }) => {
   )
 }
 
-export default connect(null, actions)(SettingsDash)
+export default connect(mapState, actions)(SettingsDash)

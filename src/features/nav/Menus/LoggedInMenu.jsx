@@ -3,7 +3,7 @@ import { Menu, Image, Dropdown } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const LoggedInMenu = ({ logOut, currentUser }) => {
-  let displayName = currentUser.user.user.email
+  let displayName = currentUser.user.email
   return (
     <Menu.Item position='right'>
       <Image avatar spaced='right' src='/assets/test.jpg' />
@@ -12,7 +12,7 @@ const LoggedInMenu = ({ logOut, currentUser }) => {
           {/* <Dropdown.Item text='Create Community' icon='plus' /> */}
           {/* <Dropdown.Item text='My Communities' icon='calendar' /> */}
           {/* <Dropdown.Item text='My Network' icon='users' /> */}
-          <Dropdown.Item text='My Profile' icon='user' />
+          {/* <Dropdown.Item text='My Profile' icon='user' /> */}
           <Dropdown.Item
             as={Link}
             to='/settings'
