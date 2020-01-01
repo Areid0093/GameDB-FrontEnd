@@ -9,22 +9,6 @@ import axios from 'axios'
 
 const url = 'http://localhost:3001'
 
-// export const createCommunity = community => {
-//   return async dispatch => {
-//     try {
-//       dispatch({
-//         type: CREATE_COMMUNITY,
-//         payload: {
-//           community
-//         }
-//       })
-//       toastr.success('Success!', 'Community has been created!')
-//     } catch (error) {
-//       toastr.error('Oops!', 'Something went wrong!')
-//     }
-//   }
-// }
-
 export const createCommunity = (community) => {
   return dispatch => {
     return axios
@@ -39,7 +23,7 @@ export const createCommunity = (community) => {
       })
       .catch(error => {
         console.log(error)
-        toastr.error('Oops!', 'Something went wrong!')
+        toastr.error('Oops!', 'Please register or log in to create a community!')
       })
   }
 }

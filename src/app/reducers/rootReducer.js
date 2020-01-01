@@ -8,6 +8,7 @@ import asyncReducer from '../../features/async/asyncReducer'
 import recentReducer from '../../features/home/RecentList/recentReducer'
 import upcomingReducer from '../../features/home/UpcomingList/upcomingReducer'
 import topReducer from '../../features/home/TopGameList/topReducer'
+import userReducer from '../../features/user/userReducer'
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   recentGames: recentReducer,
   upcomingGames: upcomingReducer,
   topGames: topReducer,
-  toastr: ToastrReducer
+  toastr: ToastrReducer,
+  user: userReducer
 })
 
 export default rootReducer
