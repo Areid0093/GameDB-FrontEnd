@@ -28,7 +28,7 @@ class GameListItem extends Component {
         </Segment>
         <Segment clearing>
           <Button as='a' color='teal' floated='right' content='Favorite' />
-          <Button as='a' color='teal' floated='left' content='View' />
+          {/* <Button as='a' color='teal' floated='left' content='View' /> */}
         </Segment>
       </Segment.Group>
     )

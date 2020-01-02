@@ -11,8 +11,7 @@ export const updateProfile = user => {
     const { password_digest, created_at, updated_at, id, ...updatedUser } = user
     axios
       .patch(`${url}/users/${userId}`, {
-        user
-        // {email: user.email, platform: user.platform, gender: user.gender, birthday: user.birthday}
+        user: updatedUser
       })
       .then(response => {
         console.log(user)

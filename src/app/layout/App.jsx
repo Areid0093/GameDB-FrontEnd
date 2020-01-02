@@ -10,7 +10,6 @@ import CommunityDetailedPage from '../../features/community/CommunityDetailed/Co
 import RecentDetailedPage from '../../features/home/HomeDetailed/RecentDetailedPage'
 import UpcomingDetailedPage from '../../features/home/HomeDetailed/UpcomingDetailedPage'
 import TopDetailedPage from '../../features/home/HomeDetailed/TopDetailedPage'
-import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage'
 import CommunityForm from '../../features/community/CommunityForm/CommunityForm'
 import SettingsDash from '../../features/user/Settings/SettingsDash'
 import ModalManager from '../../features/modals/ModalManager'
@@ -39,8 +38,6 @@ class App extends Component {
                   <Route exact path='/communities' component={CommunityDash} />
                   <Route path='/settings' component={SettingsDash} />
                   <Route path='/games' component={GameDash} />
-
-                  <Route path='/profile/:id' component={UserDetailedPage} />
                   <Route
                     path={['/createCommunity', '/manage/:id']}
                     component={CommunityForm}

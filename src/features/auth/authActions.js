@@ -10,13 +10,14 @@ export const registerUser = user => {
   return (dispatch, getState) => {
     return axios
       .post(`${url}/users`, {
-        user: user
+        user
       })
       .then(response => {
         const token = response.data.jwt
         let userId = response.data.user.id
-        let user = response.data
+        let user = response.data.user
         console.log(response.data.jwt)
+        console.log(user)
         localStorage.setItem('token', token)
         localStorage.setItem('userId', userId)
         dispatch({ type: types.LOGIN_USER, payload: { user } })
@@ -40,7 +41,8 @@ export const loginUser = user => {
         const token = response.data.jwt
         let userId = response.data.user.id
         let user = response.data.user
-        console.log(response.data)
+        console.log(response.data.jwt)
+        console.log(user)
         localStorage.setItem('token', token)
         localStorage.setItem('userId', userId)
         dispatch({ type: types.LOGIN_USER, payload: { user } })

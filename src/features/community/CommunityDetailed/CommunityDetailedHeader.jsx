@@ -1,6 +1,6 @@
 import React from 'react'
 import { Segment, Item, Image, Header, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const eventImageStyle = {
   filter: 'brightness(30%)'
@@ -16,6 +16,7 @@ const eventImageTextStyle = {
 }
 
 const CommunityDetailedHeader = ({ community }) => {
+  // console.log(community)
   return (
     <Segment.Group>
       <Segment basic attached='top' style={{ padding: '0' }}>
