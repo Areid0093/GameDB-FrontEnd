@@ -42,7 +42,7 @@ const platform = [
 
 const validate = combineValidators({
   name: isRequired({ message: 'Community name is required!' }),
-  title: isRequired({ message: 'At least one game title is required!' }),
+  title: isRequired({ message: 'Game title is required!' }),
   description: composeValidators(
     isRequired({ message: 'Please enter a description!' }),
     hasLengthGreaterThan(4)({

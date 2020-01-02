@@ -10,8 +10,8 @@ const SettingsNav = () => {
         <Menu.Item as={NavLink} to='/settings/basic'>
           Basics
         </Menu.Item>
-        <Menu.Item as={NavLink} to='/settings/about'>
-          About Me
+        <Menu.Item as={NavLink} to='/settings/favorites'>
+          Favorites
         </Menu.Item>
         <Menu.Item as={NavLink} to='/settings/photos'>
           My Photos

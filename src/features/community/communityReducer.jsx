@@ -27,6 +27,7 @@ const deleteCommunity = (state, payload) => {
 const fetchCommunities = (state, payload) => {
   return payload.community
 }
+
 const setCommunities = (state, payload) => {
   return payload.communities
 }
