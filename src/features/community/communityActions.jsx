@@ -6,14 +6,17 @@ import {
 } from '../async/asyncActions'
 import { toastr } from 'react-redux-toastr'
 import axios from 'axios'
+import { createNewCommunity } from '../../app/common/utils/helpers'
 
 const url = 'http://localhost:3001'
 
-export const createCommunity = (community) => {
-  return dispatch => {
-    return axios
+export const createCommunity = community => {
+  return (dispatch, getState) => {
+    const user = getState().auth.currentUser.user
+    const newCommunity = createNewCommunity(user, community)
+    axios
       .post(`${url}/communities`, {
-        community: community
+        community: newCommunity
       })
       .then(response => {
         let community = response.data
@@ -23,7 +26,10 @@ export const createCommunity = (community) => {
       })
       .catch(error => {
         console.log(error)
-        toastr.error('Oops!', 'Please register or log in to create a community!')
+        toastr.error(
+          'Oops!',
+          'Please register or log in to create a community!'
+        )
       })
   }
 }
@@ -47,14 +53,15 @@ export const deleteCommunity = communityId => {
 }
 
 export const loadCommunities = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
     axios
       .get('http://localhost:3001/communities')
       .then(response => {
-        let communities = response.data
-        dispatch(asyncActionStart())
-        dispatch({ type: types.FETCH_COMMUNITIES, payload: { communities } })
-        dispatch(asyncActionFinish())
+        let community = response.data
+        console.log(community)
+        // dispatch(asyncActionStart())
+        dispatch({ type: types.FETCH_COMMUNITIES, payload: { community } })
+        // dispatch(asyncActionFinish())
       })
       .catch(error => {
         console.log(error)

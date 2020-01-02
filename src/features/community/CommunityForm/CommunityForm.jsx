@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react'
 import { createCommunity } from '../communityActions'
-import axios from 'axios'
 import TextInput from '../../../app/common/form/TextInput'
 import TextArea from '../../../app/common/form/TextArea'
 import SelectInput from '../../../app/common/form/SelectInput'
@@ -16,9 +15,9 @@ import {
 
 const mapState = (state, ownProps) => {
   const communityId = ownProps.match.params.id
-
+  // console.log(state.communities)
   let community = {}
-
+  
   if (communityId && state.communities.length > 0) {
     community = state.communities.filter(
       community => community.id === communityId
@@ -35,15 +34,15 @@ const actions = {
 }
 
 const platform = [
-  { key: 'xbox', text: 'Xbox', value: 'xbox' },
-  { key: 'playstation', text: 'Playstation', value: 'playstation' },
-  { key: 'pc', text: 'PC', value: 'pc' },
-  { key: 'nintendo switch', text: 'Nintendo Switch', value: 'nintendo switch' },
+  { key: 'xbox', text: 'Xbox', value: 'Xbox' },
+  { key: 'playstation', text: 'Playstation', value: 'Playstation' },
+  { key: 'pc', text: 'PC', value: 'Windows' },
+  { key: 'nintendo switch', text: 'Nintendo Switch', value: 'Nintendo Switch' },
 ]
 
 const validate = combineValidators({
   name: isRequired({ message: 'Community name is required!' }),
-  title: isRequired({ message: 'At least one game title is required!' }),
+  title: isRequired({ message: 'Game title is required!' }),
   description: composeValidators(
     isRequired({ message: 'Please enter a description!' }),
     hasLengthGreaterThan(4)({
@@ -61,7 +60,7 @@ class CommunityForm extends Component {
   }
 
   render() {
-    const { invalid, submitting, pristine, createCommunity } = this.props
+    const { invalid, submitting, pristine} = this.props
     return (
       <Grid>
         <Grid.Column width={10}>
@@ -79,7 +78,7 @@ class CommunityForm extends Component {
               <Field
                 name='title'
                 component={TextInput}
-                placeholder='Game Title(s)'
+                placeholder='Game Title'
               />
               <Field
                 name='platform'

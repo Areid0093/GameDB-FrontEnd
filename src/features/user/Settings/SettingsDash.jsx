@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import SettingsNav from './SettingsNav'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import BasicPage from './BasicPage'
-import AboutPage from './AboutPage'
+import Favorites from './Favorites'
 import PhotoPage from './PhotoPage'
 import AccountPage from './AccountPage'
 import { updatePassword } from '../../auth/authActions'
@@ -45,7 +45,7 @@ const SettingsDash = ({ updatePassword, user, updateProfile, userData }) => {
             path='/settings/basic'
             render={() => <BasicPage initialValues={userData} updateProfile={updateProfile}/>}
           />
-          <Route path='/settings/about' component={AboutPage} />
+          <Route path='/settings/favorites' component={Favorites} />
           <Route path='/settings/photos' component={PhotoPage} />
           <Route
             path='/settings/account'

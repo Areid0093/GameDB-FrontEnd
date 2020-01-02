@@ -1,64 +1,85 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux'
 import axios from 'axios'
-import { Grid, Header, Icon } from 'semantic-ui-react'
+import TextInput from '../../../app/common/form/TextInput'
+import { Grid, Header, Icon, Form, Segment, Button } from 'semantic-ui-react'
 import GameList from '../GameList/GameList'
+import {fetchGames} from '../gameActions'
+
+const mapState = state => ({
+  games: state.games
+})
+
+const actions = {
+  fetchGames
+} 
+
 
 class GameDash extends Component {
-  state = {
-    games: []
-  }
 
-  componentDidMount() {
-    this.fetchGames()
+  gameSubmit = (games) => {
+    this.props.fetchGames(games)
+    this.setState({games})
   }
-
-  fetchGames = () => {
-    const proxy = 'https://cors-anywhere.herokuapp.com/'
-    let query = 'sonic'
-    axios({
-      url: proxy + 'https://api-v3.igdb.com/games',
-      method: 'POST',
-      headers: {
-        Accept: '*',
-        'user-key': 'c90cb5de0b345a2d028c840c4d36d540'
-      },
-      data:
-        'f genres.name, first_release_date, cover.url, *;' +
-        'limit 10;' +
-        'where (cover.url != null & first_release_date != null);' +
-        `search "${query}";`
-    })
-      .then(response => {
-        // debugger
-        console.log(response)
-        this.setState({ games: response.data })
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  }
-
+  
   render() {
-    const { games } = this.state
+    const { games, submitting, invalid, pristine } = this.props
     let first = games.filter((x, i) => !(i % 2))
     let second = games.filter((x, i) => i % 2)
     return (
-      <Header as='h2' size='huge' color='teal' icon>
-        Game Database
-        <Icon size='tiny' color='teal' name='gamepad' />
-        <Grid columns={2}>
-        <Grid.Row stretched>
-          <Grid.Column>
-            <GameList games={first} />
-          </Grid.Column>
-          <Grid.Column>
-            <GameList games={second} />
-          </Grid.Column>
+      <Fragment>
+        <Grid>
+          <Segment>
+            <Header sub color='teal' content='Game Search' />
+            <Form
+              onSubmit={this.props.handleSubmit(this.gameSubmit)}
+              autoComplete='off'
+            >
+              <Field
+                name='query'
+                component={TextInput}
+                placeholder='Game Name'
+              />
+              <Button
+                disabled={invalid || submitting || pristine}
+                positive
+                type='submit'
+              >
+                Submit
+              </Button>
+              </Form>
+          </Segment>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <GameList games={first} />
+            </Grid.Column>
+            <Grid.Column>
+              <GameList games={second} />
+            </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Header>
+      </Fragment>
     )
   }
 }
 
-export default GameDash
+export default connect(
+  mapState,
+  actions
+)(reduxForm({ form: 'gameForm' })(GameDash))
+
+// <Header as='h2' size='huge' color='teal' icon>
+//   Game Database
+//   <Icon size='tiny' color='teal' name='gamepad' />
+//   <Grid columns={2}>
+//   <Grid.Row stretched>
+//     <Grid.Column>
+//       <GameList games={first} />
+//     </Grid.Column>
+//     <Grid.Column>
+//       <GameList games={second} />
+//     </Grid.Column>
+//     </Grid.Row>
+//   </Grid>
+// </Header>
