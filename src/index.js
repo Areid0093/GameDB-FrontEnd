@@ -12,12 +12,15 @@ import * as serviceWorker from './serviceWorker'
 import { configureStore } from './app/store/configureStore'
 import { loadCommunities } from './features/community/communityActions'
 import { loadTop, loadRecent, loadUpcoming } from './features/home/homeActions'
+import { fetchFavorites } from './features/favorites/favoriteActions'
+
 
 const store = configureStore()
 store.dispatch(loadCommunities())
 store.dispatch(loadTop())
 store.dispatch(loadRecent())
 store.dispatch(loadUpcoming())
+store.dispatch(fetchFavorites())
 
 const app = (
   <Provider store={store}>

@@ -1,9 +1,4 @@
 import * as types from './communityConstants'
-import {
-  asyncActionStart,
-  asyncActionFinish,
-  asyncActionError
-} from '../async/asyncActions'
 import { toastr } from 'react-redux-toastr'
 import axios from 'axios'
 import { createNewCommunity } from '../../app/common/utils/helpers'
@@ -59,13 +54,10 @@ export const loadCommunities = () => {
       .then(response => {
         let community = response.data
         console.log(community)
-        // dispatch(asyncActionStart())
         dispatch({ type: types.FETCH_COMMUNITIES, payload: { community } })
-        // dispatch(asyncActionFinish())
       })
       .catch(error => {
         console.log(error)
-        dispatch(asyncActionError())
       })
   }
 }

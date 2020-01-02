@@ -9,11 +9,6 @@ const updateUser = (state, payload) => {
   }
 }
 
-const createFavorite = (state, payload) => {
-  return {
-    favorite: payload
-  }
-}
 
 export default createReducer(initialState, {
   [UPDATE_PROFILE]: updateUser
