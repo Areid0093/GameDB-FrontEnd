@@ -9,33 +9,51 @@ import PhotoPage from './PhotoPage'
 import AccountPage from './AccountPage'
 import { updatePassword } from '../../auth/authActions'
 import { updateProfile } from '../userActions'
+import { fetchFavorites } from '../../favorites/favoriteActions'
 
 const actions = {
   updatePassword,
-  updateProfile
+  updateProfile,
+  fetchFavorites
 }
 
-// const mapState = state => ({
-//   user: state.auth.currentUser,
-//   userData: state.auth.currentUser.user.user
-// })
-
-const mapState = state => {
+const mapState = (state, ownProps) => {
+  const userId = localStorage.getItem('userId')
   let userData = {}
 
   if (state.auth.authenticated) {
     userData = state.auth.currentUser.user
   }
 
+  let favorite = {}
+
+  if (
+    state.favorites.favorite.favorite &&
+    state.favorites.favorite.favorite.length > 0
+  ) {
+    favorite = state.favorites.favorite.favorite.filter(
+      favorite => favorite.user_id === parseInt(userId)
+      )
+      debugger
+  }
+
   return {
     userData: userData,
-    user: state.auth
-  };
-};
+    user: state.auth,
+    favorite
+  }
+}
 
-const SettingsDash = ({ updatePassword, user, updateProfile, userData }) => {
+const SettingsDash = ({
+  updatePassword,
+  user,
+  updateProfile,
+  userData,
+  favorite
+}) => {
   console.log(user)
   console.log(userData)
+  console.log(favorite)
   return (
     <Grid>
       <Grid.Column width={12}>
@@ -43,9 +61,17 @@ const SettingsDash = ({ updatePassword, user, updateProfile, userData }) => {
           <Redirect exact from='/settings' to='/settings/basic' />
           <Route
             path='/settings/basic'
-            render={() => <BasicPage initialValues={userData} updateProfile={updateProfile}/>}
+            render={() => (
+              <BasicPage
+                initialValues={userData}
+                updateProfile={updateProfile}
+              />
+            )}
           />
-          <Route path='/settings/favorites' component={Favorites} />
+          <Route
+            path='/settings/favorites'
+            render={() => <Favorites favorite={favorite} />}
+          />
           <Route path='/settings/photos' component={PhotoPage} />
           <Route
             path='/settings/account'

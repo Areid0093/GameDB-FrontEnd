@@ -1,8 +1,5 @@
 import axios from 'axios'
 import * as types from './gameConstants'
-import { toastr } from 'react-redux-toastr'
-
-const url = 'http://localhost:3001'
 
 export const fetchGames = ({ query }) => {
   return (dispatch, getState) => {

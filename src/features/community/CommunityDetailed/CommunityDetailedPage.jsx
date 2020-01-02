@@ -5,7 +5,7 @@ import CommunityDetailedHeader from './CommunityDetailedHeader'
 import CommunityDetailedInfo from './CommunityDetailedInfo'
 import CommunityDetailedChat from './CommunityDetailedChat'
 import CommunityDetailedSidebar from './CommunityDetailedSidebar'
-import axios from 'axios'
+
 
 const mapState = (state, ownProps) => {
   const communityId = ownProps.match.params.id
@@ -15,10 +15,9 @@ const mapState = (state, ownProps) => {
   
   if (state.communities && state.communities.length > 0) {
     community = state.communities.filter(
-      community => community.id === communityId
+      community => community.id === parseInt(communityId)
     )[0]
   }
-  debugger
   return {
     community
   }
@@ -46,7 +45,7 @@ class CommunityDetailedPage extends Component {
     return (
       <Grid>
         <Grid.Column width={10}>
-          <CommunityDetailedHeader />
+          <CommunityDetailedHeader community={community}/>
           <CommunityDetailedInfo />
           <CommunityDetailedChat  />
         </Grid.Column>

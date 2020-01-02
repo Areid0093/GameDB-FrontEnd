@@ -16,6 +16,8 @@ export const createNewFavorite = (user, game, favorite) => {
     return {
         ...favorite,
         user_id: user.id,
-        game_id: game
+        game_id: game.id,
+        photo: game.cover.url,
+        name: game.name
     }
 }

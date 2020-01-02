@@ -10,6 +10,7 @@ import upcomingReducer from '../../features/home/UpcomingList/upcomingReducer'
 import topReducer from '../../features/home/TopGameList/topReducer'
 import userReducer from '../../features/user/userReducer'
 import gameReducer from '../../features/game/gameReducer'
+import favoriteReducer from '../../features/favorites/favoriteReducer'
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   topGames: topReducer,
   toastr: ToastrReducer,
   user: userReducer,
-  games: gameReducer
+  games: gameReducer,
+  favorites: favoriteReducer
 })
 
 export default rootReducer

@@ -2,6 +2,7 @@ import React from 'react'
 import { Segment, Container, Header, Button, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { loadTop, loadUpcoming, loadRecent } from '../homeActions'
+import { fetchFavorites } from '../../favorites/favoriteActions'
 
 const mapState = state => ({
   topGames: state.topGames,

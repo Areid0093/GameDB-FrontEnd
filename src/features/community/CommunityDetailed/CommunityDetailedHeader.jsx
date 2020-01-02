@@ -32,7 +32,7 @@ const CommunityDetailedHeader = ({ community }) => {
                   style={{ color: 'white' }}
                 />
                 <p>
-                  {/* Created By <strong>{community.creator}</strong> */}
+                  Created By <strong>{community.creator}</strong>
                 </p>
               </Item.Content>
             </Item>
